@@ -1,0 +1,24 @@
+#coding:utf-8
+#filename:log/configer.yml
+
+formatters:
+  simple: '%(asctime)s - %(filename)s[line:%(lineno)d] - %(levelname)s: %(message)s'
+handlers:
+  base:
+    class: logging.handlers.RotatingFileHandler
+    formatter: simple
+    filename: ./log/log.txt
+
+  test:
+    class: logging.handlers.RotatingFileHandler
+    formatter: simple
+    filename: ./log/log1.txt
+loggers:
+  BasePackage:
+    level: INFO
+    handlers: [base]
+    propagate: no
+  TestPackage:
+    level: DEBUG
+    handlers: [test]
+    propagate: no

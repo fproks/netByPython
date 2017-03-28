@@ -1,0 +1,1017 @@
+<!DOCTYPE HTML>
+<html xmlns:wb="http://open.weibo.com/wb">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <title>最详细的Log4j使用教程 &#8211; 码农网</title>
+    <link rel='stylesheet' id='wp-pagenavi-css'
+          href='http://www.codeceo.com/wp-content/plugins/wp-pagenavi/pagenavi-css.css?ver=2.70' type='text/css'
+          media='all'/>
+    <link rel='prev' title='Android 键盘监控的实现原理及过程' href='http://www.codeceo.com/article/android-keyboard-monitor.html'/>
+    <link rel='next' title='MATLAB 元编程介绍' href='http://www.codeceo.com/article/matlab-meta-programming.html'/>
+    <link rel='canonical' href='http://www.codeceo.com/article/log4j-usage.html'/>
+    <meta name="keywords" content="JAVA开发, Log4j, JAVA开发, 编程开发, 首页精华">
+    <meta name="description"
+          content="日志是应用软件中不可缺少的部分，Apache的开源项目Log4j是一个功能强大的日志组件,提供方便的日志记录。在apache网站：jakarta.apache.org/log4j 可以免费下载到Log4j最新版本的软件包。 一、入门实例 1.新建一个JAva工程，导入包log4j-1.2.17.jar，整个工程最终目录如下  2、src同级创建并设置log4j.properties   ### 设置### log4j.rootLogge..">
+    <link rel="shortcut icon" href="http://static.codeceo.com/favicon.ico"/>
+    <link rel="stylesheet" href="http://static.codeceo.com/wp-asset/css/style.css" media="all">
+    <link type="text/css" rel="stylesheet"
+          href="http://static.codeceo.com/asset/script/ckeditor/plugins/codesnippet/lib/highlight/styles/github.css">
+    <link rel="stylesheet" href="http://static.codeceo.com/wp-asset/css/custom.css" media="all">
+
+    <!--[if lt IE 9]>
+    <script src="http://static.codeceo.com/wp-asset/js/html5.js"></script><![endif]-->
+    <script src="http://static.codeceo.com/wp-asset/js/jquery.min.js"></script>
+    <script src="http://static.codeceo.com/wp-asset/js/common.js"></script>
+    <script type="text/javascript"
+            src="http://static.codeceo.com/asset/script/ckeditor/plugins/codesnippet/lib/highlight/highlight.pack.js"></script>
+
+
+</head>
+<body class="single single-post postid-18378 single-format-standard">
+<header class="header">
+    <div class="central">
+        <a href="http://www.codeceo.com"><img src="http://static.codeceo.com/asset/css/img/logo-new.png" alt="codeceo"
+                                              class="logo"></a>
+        <ul class="nav">
+            <li><a href="http://www.codeceo.com">首页</a></li>
+            <li><a href="http://ask.codeceo.com">问答</a></li>
+            <li><a href="http://www.codeceo.com/article/category/recommanded">热门文章</a></li>
+            <li><a href="http://www.codeceo.com/article/category/pick/feed" target="_blank">RSS订阅</a></li>
+        </ul>
+    </div>
+</header>
+<div class="main-nav">
+    <div class="central">
+        <ul>
+            <li class="notag"><a href="http://www.codeceo.com">文章首页</a></li>
+
+            <li class="tag"><a href="http://www.codeceo.com/article/tag/java">Java</a></li>
+
+            <li class="tag"><a href="http://www.codeceo.com/article/tag/javascript">JavaScript</a></li>
+
+            <li class="tag"><a href="http://www.codeceo.com/article/tag/php">PHP</a></li>
+
+            <li class="tag"><a href="http://www.codeceo.com/article/tag/ios">iOS</a></li>
+
+            <li class="tag"><a href="http://www.codeceo.com/article/tag/android">Android</a></li>
+
+            <li class="tag"><a href="http://www.codeceo.com/article/tag/html5">HTML5</a></li>
+
+            <li class="tag"><a href="http://www.codeceo.com/article/tag/css3">CSS3</a></li>
+
+            <li class="tag"><a href="http://www.codeceo.com/article/tag/linux">Linux</a></li>
+
+            <li class="tag"><a href="http://www.codeceo.com/article/tag/c">C++</a></li>
+
+            <li class="tag"><a href="http://www.codeceo.com/article/tag/python">Python</a></li>
+
+            <li class="tag"><a href="http://www.codeceo.com/article/tag/csharp">C#</a></li>
+
+            <li class="tag"><a href="http://www.codeceo.com/article/tag/node.js">Node.Js</a></li>
+
+        </ul>
+    </div>
+</div>
+
+<div style="margin-bottom:16px;border-bottom:#eee solid 2px;padding:10px 0;background-color:#FCFCFC">
+    <div style="width:970px;margin:0 auto">
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <!-- 码农网大横幅 -->
+        <ins class="adsbygoogle"
+             style="display:inline-block;width:970px;height:250px"
+             data-ad-client="ca-pub-3171310320403916"
+             data-ad-slot="2281748188"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+</div>
+
+<section class="central container">
+    <div class="content-wrap">
+        <div class="content">
+            <div class="artical">
+                <header class="article-header">
+                    <h1 class="article-title"><a href="http://www.codeceo.com/article/log4j-usage.html"
+                                                 title="最详细的Log4j使用教程 - 码农网">最详细的Log4j使用教程</a></h1>
+
+                    <p class="article-meta">
+
+                        2015-05-18 &nbsp;&nbsp; 分类：<a href="http://www.codeceo.com/article/category/develop/java"
+                                                      title="查看 JAVA开发 中的全部文章" rel="category tag">JAVA开发</a>、<a
+                            href="http://www.codeceo.com/article/category/develop" title="查看 编程开发 中的全部文章"
+                            rel="category tag">编程开发</a>、<a href="http://www.codeceo.com/article/category/pick"
+                                                           title="查看 首页精华 中的全部文章" rel="category tag">首页精华</a><a
+                            class="comm" href="http://www.codeceo.com/article/log4j-usage.html#comments"
+                            title="查看 最详细的Log4j使用教程 的评论">37人评论</a> &nbsp;&nbsp;&nbsp;&nbsp;来源：<a ref="nofollow"
+                                                                                                 href="http://blog.csdn.net/evankaka/article/details/45815047"
+                                                                                                 target="_blank">林炳文Evankaka的专栏</a>
+                    </p>
+
+                    <div class="bdsharebuttonbox share" data-tag="share_1">
+                        <span class="share-tit">分享到：</span>
+                        <a class="bds_mshare" data-cmd="mshare"></a>
+                        <a class="bds_qzone" data-cmd="qzone" href="#"></a>
+                        <a class="bds_tsina" data-cmd="tsina"></a>
+                        <a class="bds_weixin" data-cmd="weixin"></a>
+                        <a class="bds_baidu" data-cmd="baidu"></a>
+                        <a class="bds_renren" data-cmd="renren"></a>
+                        <a class="bds_tqq" data-cmd="tqq"></a>
+                        <a class="bds_more" data-cmd="more">更多</a>
+                        <a class="bds_count" data-cmd="count"></a>
+                    </div>
+
+
+                </header>
+
+
+                <div class="article-entry" id="article-entry">
+
+
+                    <p>日志是应用软件中不可缺少的部分，Apache的开源项目<span class='wp_keywordlink'><a
+                            href="http://www.codeceo.com/article/log4j-usage.html" title="log4j"
+                            target="_blank">log4j</a></span>是一个功能强大的日志组件,提供方便的日志记录。在apache网站：<a
+                            href="http://jakarta.apache.org/log4j" target="_blank">jakarta.apache.org/log4j</a>
+                        可以免费下载到Log4j最新版本的软件包。</p>
+                    <h2><a name="t0"></a>一、入门实例</h2>
+                    <p>1.新建一个JAva工程，导入包log4j-1.2.17.jar，整个工程最终目录如下</p>
+                    <p align="center"><img
+                            src="http://static.codeceo.com/images/2015/05/4b08140cb7fc48b1af2646ad4b021735.jpg" alt=""/>
+                    </p>
+                    <p align="left">2、src同级创建并设置log4j.properties</p>
+                    <pre class="brush: bash; gutter: false; first-line: 1"> ### 设置###
+log4j.rootLogger = debug,stdout,D,E
+
+### 输出信息到控制抬 ###
+log4j.appender.stdout = org.apache.log4j.ConsoleAppender
+log4j.appender.stdout.Target = System.out
+log4j.appender.stdout.layout = org.apache.log4j.PatternLayout
+log4j.appender.stdout.layout.ConversionPattern = [%-5p] %d{yyyy-MM-dd HH:mm:ss,SSS} method:%l%n%m%n
+
+### 输出DEBUG 级别以上的日志到=E://logs/error.log ###
+log4j.appender.D = org.apache.log4j.DailyRollingFileAppender
+log4j.appender.D.File = E://logs/log.log
+log4j.appender.D.Append = true
+log4j.appender.D.Threshold = DEBUG
+log4j.appender.D.layout = org.apache.log4j.PatternLayout
+log4j.appender.D.layout.ConversionPattern = %-d{yyyy-MM-dd HH:mm:ss}  [ %t:%r ] - [ %p ]  %m%n
+
+### 输出ERROR 级别以上的日志到=E://logs/error.log ###
+log4j.appender.E = org.apache.log4j.DailyRollingFileAppender
+log4j.appender.E.File =E://logs/error.log
+log4j.appender.E.Append = true
+log4j.appender.E.Threshold = ERROR
+log4j.appender.E.layout = org.apache.log4j.PatternLayout
+log4j.appender.E.layout.ConversionPattern = %-d{yyyy-MM-dd HH:mm:ss}  [ %t:%r ] - [ %p ]  %m%n</pre>
+                    <p align="left">3、设置日志内容</p>
+                    <pre class="brush: java; gutter: false; first-line: 1">package com.mucfc;
+import org.apache.log4j.Logger;
+/**
+ *@author linbingwen
+ *@2015年5月18日9:14:21
+ */
+public class Test {
+	private static Logger logger = Logger.getLogger(Test.class);
+
+    /**
+     * @param args
+     */
+    public static void main(String[] args) {
+        // System.out.println("This is println message.");
+
+        // 记录debug级别的信息
+        logger.debug("This is debug message.");
+        // 记录info级别的信息
+        logger.info("This is info message.");
+        // 记录error级别的信息
+        logger.error("This is error message.");
+    }
+
+}</pre>
+                    <p align="left">4、输出结果</p>
+                    <p>（1）首先是控制台的信息</p>
+                    <p align="center"><img
+                            src="http://static.codeceo.com/images/2015/05/80700478ec208d187f60107a6a517712.jpg" alt=""/>
+                    </p>
+                    <p>（2）再来看输出的文件</p>
+                    <p align="center"><img
+                            src="http://static.codeceo.com/images/2015/05/8a57406bc3f02fcd687fce535fc546ee.jpg" alt=""/>
+                    </p>
+                    <p>内容如下，发现已按照要求输出到对应的文档中去了。</p>
+                    <p align="center"><img
+                            src="http://static.codeceo.com/images/2015/05/e3dc8eb3a3841a2f50dd24567f41b4d5.jpg" alt=""/>
+                    </p>
+                    <p align="center"><img
+                            src="http://static.codeceo.com/images/2015/05/f82057d8ca93b4f23893cc9e204f1a51.jpg" alt=""/>
+                    </p>
+                    <h2><a name="t1"></a>二、Log4j基本使用方法</h2>
+                    <p>Log4j由三个重要的组件构成：日志信息的优先级，日志信息的输出目的地，日志信息的输出格式。日志信息的优先级从高到低有ERROR、WARN、
+                        INFO、DEBUG，分别用来指定这条日志信息的重要程度；日志信息的输出目的地指定了日志将打印到控制台还是文件中；而输出格式则控制了日志信息的显 示内容。</p>
+                    <p>2.1、定义配置文件</p>
+                    <p>
+                        其实您也可以完全不使用配置文件，而是在代码中配置Log4j环境。但是，使用配置文件将使您的应用程序更加灵活。Log4j支持两种配置文件格式，一种是XML格式的文件，一种是Java特性文件（键=值）。下面我们介绍使用Java特性文件做为配置文件的方法：<br/>
+                        1.配置根Logger，其语法为：</p>
+                    <pre class="brush: java; gutter: false; first-line: 1">log4j.rootLogger = [ level ] , appenderName, appenderName, …</pre>
+                    <p>其中，level 是日志记录的优先级，分为OFF、FATAL、ERROR、WARN、INFO、DEBUG、ALL或者您定义的级别。Log4j建议只使用四个级别，优
+                        先级从高到低分别是ERROR、WARN、INFO、DEBUG。通过在这里定义的级别，您可以控制到应用程序中相应级别的日志信息的开关。比如在这里定
+                        义了INFO级别，则应用程序中所有DEBUG级别的日志信息将不被打印出来。 appenderName就是指B日志信息输出到哪个地方。您可以同时指定多个输出目的地。</p>
+                    <p>2.配置日志信息输出目的地Appender，其语法为：</p>
+                    <pre class="brush: java; gutter: false; first-line: 1">log4j.appender.appenderName = fully.qualified.name.of.appender.class
+log4j.appender.appenderName.option1 = value1
+…
+log4j.appender.appenderName.option = valueN</pre>
+                    <p>其中，Log4j提供的appender有以下几种：</p>
+                    <pre class="brush: java; gutter: false; first-line: 1">org.apache.log4j.ConsoleAppender（控制台），
+org.apache.log4j.FileAppender（文件），
+org.apache.log4j.DailyRollingFileAppender（每天产生一个日志文件），
+org.apache.log4j.RollingFileAppender（文件大小到达指定尺寸的时候产生一个新的文件），
+org.apache.log4j.WriterAppender（将日志信息以流格式发送到任意指定的地方）</pre>
+                    <p align="left">3.配置日志信息的格式（布局），其语法为：</p>
+                    <pre class="brush: java; gutter: false; first-line: 1">log4j.appender.appenderName.layout = fully.qualified.name.of.layout.class
+log4j.appender.appenderName.layout.option1 = value1
+…
+log4j.appender.appenderName.layout.option = valueN</pre>
+                    <p align="left">其中，Log4j提供的layout有以e几种：</p>
+                    <pre class="brush: java; gutter: false; first-line: 1">org.apache.log4j.HTMLLayout（以HTML表格形式布局），
+org.apache.log4j.PatternLayout（可以灵活地指定布局模式），
+org.apache.log4j.SimpleLayout（包含日志信息的级别和信息字符串），
+org.apache.log4j.TTCCLayout（包含日志产生的时间、线程、类别等等信息）</pre>
+                    <p align="left">Log4J采用类似C语言中的printf函数的打印格式格式化日志信息，打印参数如下： %m 输出代码中指定的消息</p>
+                    <pre class="brush: bash; gutter: false; first-line: 1">%p 输出优先级，即DEBUG，INFO，WARN，ERROR，FATAL
+%r 输出自应用启动到输出该log信息耗费的毫秒数
+%c 输出所属的类目，通常就是所在类的全名
+%t 输出产生该日志事件的线程名
+%n 输出一个回车换行符，Windows平台为“rn”，Unix平台为“n”
+%d 输出日志时间点的日期或时间，默认格式为ISO8601，也可以在其后指定格式，比如：%d{yyy MMM dd HH:mm:ss,SSS}，输出类似：2002年10月18日 22：10：28，921
+%l 输出日志事件的发生位置，包括类目名、发生的线程，以及在代码中的行数。举例：Testlog4.main(TestLog4.java:10)</pre>
+                    <p align="left">2.2、在代码中使用Log4j</p>
+                    <p>1.得到记录器</p>
+                    <p>使用Log4j，第一步就是获取日志记录器，这个记录器将负责控制日志信息。其语法为：</p>
+                    <p>public static Logger getLogger( String name)</p>
+                    <p>通过指定的名字获得记录器，如果必要的话，则为这个名字创建一个新的记录器。Name一般取本类的名字，比如：</p>
+                    <p>static Logger logger = Logger.getLogger ( ServerWithLog4j.class.getName () )</p>
+                    <p>2.读取配置文件</p>
+                    <p>当获得了日志记录器之后，第二步将配置Log4j环境，其语法为：</p>
+                    <pre class="brush: java; gutter: false; first-line: 1">BasicConfigurator.configure ()： 自动快速地使用缺省Log4j环境。
+PropertyConfigurator.configure ( String configFilename) ：读取使用Java的特性文件编写的配置文件。
+DOMConfigurator.configure ( String filename ) ：读取XML形式的配置文件。</pre>
+                    <p align="left">3.插入记录信息（格式化日志信息）</p>
+                    <p align="left">当上两个必要步骤执行完毕，您就可以轻松地使用不同优先级别的日志记录语句插入到您想记录日志的任何地方，其语法如下：</p>
+                    <pre class="brush: java; gutter: false; first-line: 1">Logger.debug ( Object message ) ;
+Logger.info ( Object message ) ;
+Logger.warn ( Object message ) ;
+Logger.error ( Object message ) ;</pre>
+                    <p>2.3、日志级别</p>
+                    <p>每个Logger都被了一个日志级别（log level），用来控制日志信息的输出。日志级别从高到低分为：<br/>
+                        A：off 最高等级，用于关闭所有日志记录。<br/>
+                        B：fatal 指出每个严重的错误事件将会导致应用程序的退出。<br/>
+                        C：error 指出虽然发生错误事件，但仍然不影响系统的继续运行。<br/>
+                        D：warm 表明会出现潜在的错误情形。<br/>
+                        E：info 一般和在粗粒度级别上，强调应用程序的运行全程。<br/>
+                        F：debug 一般用于细粒度级别上，对调试应用程序非常有帮助。<br/>
+                        G：all 最低等级，用于打开所有日志记录。</p>
+                    <p>
+                        上面这些级别是定义在org.apache.log4j.Level类中。Log4j只建议使用4个级别，优先级从高到低分别是error,warn,info和debug。通过使用日志级别，可以控制应用程序中相应级别日志信息的输出。例如，如果使用b了info级别，则应用程序中所有低于info级别的日志信息(如debug)将不会被打印出来。</p>
+                    <h2><a name="t2"></a>三、Web项目中使用Log4j实例</h2>
+                    <p>
+                        上面代码描述了Log4j的简单应用，其实使用Log4j也就是这样简单方便。当然除了上面的配置方法，还有其它，比如做一个J2EE应用，在J2EE应用使用Log4j，必须先在启动服务时加载Log4j的配置文件进行初始化，可以在web.xml中进行。</p>
+                    <p>
+                        1、web应用的log4j使用基本上都采用：新建一个servlet，这个servlet在init函数中为log4j执行配置。一般就是读入配置文件。所以需要在web.xml中为这个servlet配置，同时设定load-on-startup为1。</p>
+                    <p>2、这个servlet配置log4j就是读出配置文件，然后调用configure函数。这里有两个问题：一、需要知道文件在哪里；二、需要正确的文件类型</p>
+                    <p>3、配置文件位置在web.xml中配置一个param即可，路径一般是相对于web的root目录</p>
+                    <p>4、文件类型一般有两种，一个是Java的property文件，另一种是xml文件</p>
+                    <p>配置文件的大致内容：log4j可以指定输出的log级别的最低等级，以及log的输出配置格式，每个log可以指定多个输出方式</p>
+                    <p>（1）创建Web工程，整个工程最后目录如下</p>
+                    <p align="center"><img
+                            src="http://static.codeceo.com/images/2015/05/dc9759d134b8237d1feae57140377351.jpg" alt=""/>
+                    </p>
+                    <p>（2）web.xml配置如下：</p>
+                    <pre class="brush: xml; gutter: false; first-line: 1">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://java.sun.com/xml/ns/javaee"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+    id="WebApp_ID" version="3.0"&gt;
+    &lt;display-name&gt;LogLearning&lt;/display-name&gt;
+
+    &lt;servlet&gt;
+        &lt;servlet-name&gt;Log4JTestServlet&lt;/servlet-name&gt;
+        &lt;servlet-class&gt;com.mucfc.Log4JTestServlet&lt;/servlet-class&gt;
+    &lt;/servlet&gt;
+
+    &lt;!--用来启动 log4jConfigLocation的servlet --&gt;
+    &lt;servlet&gt;
+        &lt;servlet-name&gt;Log4JInitServlet&lt;/servlet-name&gt;
+        &lt;servlet-class&gt;com.mucfc.Log4JInitServlet&lt;/servlet-class&gt;
+        &lt;init-param&gt;
+            &lt;param-name&gt;log4j-properties-location&lt;/param-name&gt;
+            &lt;param-value&gt;/WEB-INF/classes/log4j.properties&lt;/param-value&gt;
+        &lt;/init-param&gt;
+        &lt;load-on-startup&gt;1&lt;/load-on-startup&gt;
+    &lt;/servlet&gt;
+
+    &lt;servlet-mapping&gt;
+        &lt;servlet-name&gt;Log4JTestServlet&lt;/servlet-name&gt;
+        &lt;url-pattern&gt;/test&lt;/url-pattern&gt;
+    &lt;/servlet-mapping&gt;
+
+&lt;/web-app&gt;</pre>
+                    <p>（3）配置文件log4j.properties</p>
+                    <pre class="brush: bash; gutter: false; first-line: 1"> ### set log levels ###
+log4j.rootLogger = debug,stdout,D,E
+
+log4j.appender.stdout = org.apache.log4j.ConsoleAppender
+log4j.appender.stdout.Target = System.out
+log4j.appender.stdout.layout = org.apache.log4j.PatternLayout
+log4j.appender.stdout.layout.ConversionPattern = [%-5p] %d{yyyy-MM-dd HH:mm:ss,SSS} method:%l%n%m%n
+
+log4j.appender.D = org.apache.log4j.DailyRollingFileAppender
+log4j.appender.D.File = F://logs/log.log
+log4j.appender.D.Append = true
+log4j.appender.D.Threshold = DEBUG
+log4j.appender.D.layout = org.apache.log4j.PatternLayout
+log4j.appender.D.layout.ConversionPattern = %-d{yyyy-MM-dd HH:mm:ss}  [ %t:%r ] - [ %p ]  %m%n
+
+log4j.appender.E = org.apache.log4j.DailyRollingFileAppender
+log4j.appender.E.File =F://logs/error.log
+log4j.appender.E.Append = true
+log4j.appender.E.Threshold = ERROR
+log4j.appender.E.layout = org.apache.log4j.PatternLayout
+log4j.appender.E.layout.ConversionPattern = %-d{yyyy-MM-dd HH:mm:ss}  [ %t:%r ] - [ %p ]  %m%n</pre>
+                    <p>（4）web容器一来就初始化的servlet</p>
+                    <p>Log4JInitServlet.java</p>
+                    <pre class="brush: java; gutter: false; first-line: 1">package com.mucfc;
+
+import java.io.File;
+import java.io.IOException;
+
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.PropertyConfigurator;
+
+/**
+ * Servlet implementation class Log4JInitServlet
+ */
+@WebServlet("/Log4JInitServlet")
+public class Log4JInitServlet extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public Log4JInitServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+    /**
+     * @see Servlet#init(ServletConfig)
+     */
+    public void init(ServletConfig config) throws ServletException {
+        System.out.println("Log4JInitServlet 正在初始化 log4j日志设置信息");
+        String log4jLocation = config.getInitParameter("log4j-properties-location");
+
+        ServletContext sc = config.getServletContext();
+
+        if (log4jLocation == null) {
+            System.err.println("*** 没有 log4j-properties-location 初始化的文件, 所以使用 BasicConfigurator初始化");
+            BasicConfigurator.configure();
+        } else {
+            String webAppPath = sc.getRealPath("/");
+            String log4jProp = webAppPath + log4jLocation;
+            File yoMamaYesThisSaysYoMama = new File(log4jProp);
+            if (yoMamaYesThisSaysYoMama.exists()) {
+                System.out.println("使用: " + log4jProp+"初始化日志设置信息");
+                PropertyConfigurator.configure(log4jProp);
+            } else {
+                System.err.println("*** " + log4jProp + " 文件没有找到， 所以使用 BasicConfigurator初始化");
+                BasicConfigurator.configure();
+            }
+        }
+        super.init(config);
+    }
+
+    /**
+     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+     */
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // TODO Auto-generated method stub
+    }
+
+    /**
+     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+     */
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // TODO Auto-generated method stub
+    }
+
+}</pre>
+                    <p>调用日志Log4JTestServlet,java</p>
+                    <pre class="brush: java; gutter: false; first-line: 1">package com.mucfc;
+
+import java.io.IOException;
+
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.log4j.Logger;
+
+/**
+ * Servlet implementation class Log4JTestServlet
+ */
+@WebServlet("/Log4JTestServlet")
+public class Log4JTestServlet extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+    private static Logger logger = Logger.getLogger(Log4JTestServlet.class);
+
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public Log4JTestServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+    /**
+     * @see Servlet#init(ServletConfig)
+     */
+    public void init(ServletConfig config) throws ServletException {
+        // TODO Auto-generated method stub
+    }
+
+    /**
+     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+     */
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // 记录debug级别的信息
+        logger.debug("This is debug message.");
+        // 记录info级别的信息
+        logger.info("This is info message.");
+        // 记录error级别的信息
+        logger.error("This is error message.");
+    }
+
+    /**
+     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+     */
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doGet(request,response);
+    }
+
+}</pre>
+                    <p>接下来就是运行了，来看看结果：</p>
+                    <p><img src="http://static.codeceo.com/images/2015/05/9c5741445b9699c26a97f8c1c909d6e9.jpg" alt=""
+                            width="907" height="368"/></p>
+                    <p>输出结果：</p>
+                    <p align="center"><img
+                            src="http://static.codeceo.com/images/2015/05/cda300d256cc7be31f2196070f28e775.jpg" alt=""/>
+                    </p>
+                    <p align="center"><img
+                            src="http://static.codeceo.com/images/2015/05/129d046f88ac0d40ed573abb4a455023.jpg" alt=""/>
+                    </p>
+                    <p align="center"><img
+                            src="http://static.codeceo.com/images/2015/05/36d1f614028b3b9c834a92ff2b6db9c6.jpg" alt=""/>
+                    </p>
+                    <h2 align="left"><a name="t3"></a>四、Spring中使用Log4j</h2>
+                    <p align="left">这里要实现web项目中利用Spring来使用Log4j</p>
+                    <p align="center"><img
+                            src="http://static.codeceo.com/images/2015/05/ff4d4c9afff8e734428b1701f6cc7c48.jpg" alt=""/>
+                    </p>
+                    <p align="left">（1）接上面的工程，然后再导入Spring的包</p>
+                    <p align="left">（2）web.xml增加</p>
+                    <pre class="brush: xml; gutter: false; first-line: 1">&lt;!-- 设置根目录 --&gt;
+   &lt;context-param&gt;
+       &lt;param-name&gt;webAppRootKey&lt;/param-name&gt;
+       &lt;param-value&gt;webapp.root&lt;/param-value&gt;
+   &lt;/context-param&gt;
+
+   &lt;context-param&gt;
+    &lt;param-name&gt;log4jConfigLocation&lt;/param-name&gt;
+    &lt;param-value&gt;/WEB-INF/classes/log4j.properties&lt;/param-value&gt;
+&lt;/context-param&gt;
+&lt;!-- 3000表示 开一条watchdog线程每60秒扫描一下配置文件的变化;这样便于日志存放位置的改变 --&gt;
+&lt;context-param&gt;
+        &lt;param-name&gt;log4jRefreshInterval&lt;/param-name&gt;
+        &lt;param-value&gt;3000&lt;/param-value&gt;
+   &lt;/context-param&gt;
+&lt;listener&gt;
+    &lt;listener-class&gt;org.springframework.web.util.Log4jConfigListener&lt;/listener-class&gt;
+&lt;/listener&gt;</pre>
+                    <p align="left">整个内容如下：</p>
+                    <pre class="brush: xml; gutter: false; first-line: 1">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://java.sun.com/xml/ns/javaee"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+    id="WebApp_ID" version="3.0"&gt;
+    &lt;display-name&gt;LogLearning&lt;/display-name&gt;
+
+    &lt;servlet&gt;
+        &lt;servlet-name&gt;Log4JTestServlet&lt;/servlet-name&gt;
+        &lt;servlet-class&gt;com.mucfc.Log4JTestServlet&lt;/servlet-class&gt;
+    &lt;/servlet&gt;
+
+    &lt;!--用来启动 log4jConfigLocation的servlet --&gt;
+&lt;!--     &lt;servlet&gt;
+        &lt;servlet-name&gt;Log4JInitServlet&lt;/servlet-name&gt;
+        &lt;servlet-class&gt;com.mucfc.Log4JInitServlet&lt;/servlet-class&gt;
+        &lt;init-param&gt;
+            &lt;param-name&gt;log4j-properties-location&lt;/param-name&gt;
+            &lt;param-value&gt;/WEB-INF/classes/log4j.properties&lt;/param-value&gt;
+        &lt;/init-param&gt;
+        &lt;load-on-startup&gt;1&lt;/load-on-startup&gt;
+    &lt;/servlet&gt;--&gt;
+
+    &lt;servlet-mapping&gt;
+        &lt;servlet-name&gt;Log4JTestServlet&lt;/servlet-name&gt;
+        &lt;url-pattern&gt;/test&lt;/url-pattern&gt;
+    &lt;/servlet-mapping&gt;
+
+        &lt;!-- Spring 容器加载 --&gt;
+    &lt;listener&gt;
+        &lt;listener-class&gt;org.springframework.web.context.ContextLoaderListener&lt;/listener-class&gt;
+    &lt;/listener&gt;
+    &lt;context-param&gt;
+        &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;
+        &lt;param-value&gt;classpath:applicationContext.xml&lt;/param-value&gt;
+    &lt;/context-param&gt;
+
+    &lt;!-- 设置根目录 --&gt;
+    &lt;context-param&gt;
+        &lt;param-name&gt;webAppRootKey&lt;/param-name&gt;
+        &lt;param-value&gt;webapp.root&lt;/param-value&gt;
+    &lt;/context-param&gt;
+
+    &lt;context-param&gt;
+        &lt;param-name&gt;log4jConfigLocation&lt;/param-name&gt;
+        &lt;param-value&gt;/WEB-INF/classes/log4j.properties&lt;/param-value&gt;
+    &lt;/context-param&gt;
+    &lt;!-- 3000表示 开一条watchdog线程每60秒扫描一下配置文件的变化;这样便于日志存放位置的改变 --&gt;
+    &lt;context-param&gt;
+         &lt;param-name&gt;log4jRefreshInterval&lt;/param-name&gt;
+         &lt;param-value&gt;3000&lt;/param-value&gt;
+    &lt;/context-param&gt;
+    &lt;listener&gt;
+        &lt;listener-class&gt;org.springframework.web.util.Log4jConfigListener&lt;/listener-class&gt;
+    &lt;/listener&gt;
+
+&lt;/web-app&gt;</pre>
+                    <p align="left">这里Log4JInitServlet.java就相当于没用到了。</p>
+                    <p align="left">（2）applicationContext.xml</p>
+                    <p align="left">没有内容：</p>
+                    <pre class="brush: xml; gutter: false; first-line: 1">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xsi:schemaLocation="
+
+http://www.springframework.org/schema/beans
+
+
+http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+
+
+http://www.springframework.org/schema/aop
+
+
+http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+
+
+http://www.springframework.org/schema/context
+
+           http://www.springframework.org/schema/context/spring-context-3.2.xsd"&gt;
+&lt;/beans&gt;</pre>
+                    <p align="left">（3）这样日志就跟随Spring窗口启动而启动了</p>
+                    <p align="left">程序一运行，就会自动把日志打印</p>
+                    <p align="center"><img
+                            src="http://static.codeceo.com/images/2015/05/d5473d7389b204f91a8c81da4fe18843.jpg" alt=""/>
+                    </p>
+                    <p align="left">log.log</p>
+                    <p align="center"><img
+                            src="http://static.codeceo.com/images/2015/05/57b2bda5414cd421ea65ee5da09de2fd.jpg" alt=""/>
+                    </p>
+                    <p align="left">error.log为空，因为它只打印error级别以上的信息</p>
+                    <p align="left">浏览器输入http://localhost:8080/LogLearning2/test</p>
+                    <p align="center"><img
+                            src="http://static.codeceo.com/images/2015/05/e66c1d45278a9ac19fe37ab91c3b21c2.jpg" alt=""/>
+                    </p>
+                    <p align="left">然后打开文件</p>
+                    <p align="center"><img
+                            src="http://static.codeceo.com/images/2015/05/5107e6f30ef1c81cd3be210095780f15.jpg" alt=""/>
+                    </p>
+                    <p align="center"><img
+                            src="http://static.codeceo.com/images/2015/05/0603b30d871c140b429a52c79adfae1a.jpg" alt=""/>
+                    </p>
+                    <script type="text/javascript">
+                        var strBatchView = 18378</script>
+
+                    <a id="soft-link" name="soft-link"></a>
+
+                    <div style="width:336px;height:280px;margin:40px auto">
+                        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                        <!-- codeceo-bottom-big -->
+                        <ins class="adsbygoogle"
+                             style="display:inline-block;width:336px;height:280px"
+                             data-ad-client="ca-pub-3171310320403916"
+                             data-ad-slot="5138981789"></ins>
+                        <script>
+                            (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
+                    </div>
+
+
+                    <!--开源软件资源链接-->
+                    <!--开源软件资源链接结束-->
+
+
+                    <div class="bd_ad_bottom" style="margin:40px 0 40px 0">
+
+                        <div class="sogou_ads" style="float:left;margin-right:36px">
+                            <script type="text/javascript">
+                                /*码农网文章底部1*/
+                                var cpro_id = "u2809630";
+                            </script>
+                            <script type="text/javascript" src="http://cpro.baidustatic.com/cpro/ui/c.js"></script>
+                        </div>
+
+                        <div class="baidu_ads" style="float:left">
+                            <script type="text/javascript">
+                                /*码农网文章底部2*/
+                                var cpro_id = "u2809631";
+                            </script>
+                            <script type="text/javascript" src="http://cpro.baidustatic.com/cpro/ui/c.js"></script>
+                        </div>
+                        <div style="clear:both"></div>
+                    </div>
+
+                </div>
+
+                <div id="related-post-content">
+                    <!-- 相关资料开始 -->
+                    <h3>相关文章</h3>
+                    <ul class="d_hotpost_txt">
+                        <li><a href="http://www.codeceo.com/article/log4j-architecture.html" target="_blank">Log4j日志体系结构解读</a>
+                        </li>
+                        <li><a href="http://www.codeceo.com/article/tensorflow-and-handwritten-chinese-character.html"
+                               target="_blank">TensorFlow 与中文手写汉字识别</a></li>
+                        <li><a href="http://www.codeceo.com/article/javascript-functional-programing.html"
+                               target="_blank">我眼中的 JavaScript 函数式编程</a></li>
+                        <li><a href="http://www.codeceo.com/article/java-libraries-you-can-t-miss-in-2017.html"
+                               target="_blank">2017 年你不能错过的 Java 类库</a></li>
+                        <li><a href="http://www.codeceo.com/article/rxjava-single-and-completable.html" target="_blank">理解
+                            RxJava 中的 Single 和 Completable</a></li>
+                        <li><a href="http://www.codeceo.com/article/android-binder-part-three.html" target="_blank">理解
+                            Android Binder 机制（三）：Java层</a></li>
+                        <li><a href="http://www.codeceo.com/article/android-binder-part-two.html" target="_blank">理解
+                            Android Binder 机制（二）：C++层</a></li>
+                        <li><a href="http://www.codeceo.com/article/android-binder-part-one.html" target="_blank">理解
+                            Android Binder 机制（一）：驱动篇</a></li>
+                    </ul>
+                    <!-- 相关资料结束 -->
+
+                    <div class="fast-operate" style="border-top:#009F64 solid 2px;padding:10px 0;margin-top:10px;">
+                        <p>
+                            在文章中找不到问题答案？您还可以</p>
+                        <a class="fast-button fast-ask" href="http://ask.codeceo.com/" target="_blank">前往问答社区提问</a>
+                    </div>
+
+                </div>
+                <footer class="article-footer">
+                    <div class="bdsharebuttonbox share" data-tag="share_1">
+                        <span class="share-tit">分享到：</span>
+                        <a class="bds_mshare" data-cmd="mshare"></a>
+                        <a class="bds_qzone" data-cmd="qzone" href="#"></a>
+                        <a class="bds_tsina" data-cmd="tsina"></a>
+                        <a class="bds_weixin" data-cmd="weixin"></a>
+                        <a class="bds_baidu" data-cmd="baidu"></a>
+                        <a class="bds_renren" data-cmd="renren"></a>
+                        <a class="bds_tqq" data-cmd="tqq"></a>
+                        <a class="bds_more" data-cmd="more">更多</a>
+                        <a class="bds_count" data-cmd="count"></a>
+                    </div>
+
+                    <div class="article-tags">继续浏览有关<a href="http://www.codeceo.com/article/tag/java"
+                                                       rel="tag">JAVA开发</a><a
+                            href="http://www.codeceo.com/article/tag/log4j" rel="tag">Log4j</a>的文章
+                    </div>
+                </footer>
+
+
+            </div>
+
+
+            <a name="comments"></a>
+            <div id="SOHUCS" sid="18378"></div>
+            <script charset="utf-8" type="text/javascript" src="http://changyan.sohu.com/upload/changyan.js"></script>
+            <script type="text/javascript">
+                window.changyan.api.config({
+                    appid: 'cysHL8j6i',
+                    conf: 'prod_6de517d60b8ff6ea246dbc341515d4a9'
+                });
+            </script>
+
+        </div>
+    </div>
+
+
+    <aside class="sidebar">
+        <div class="widget widget_text">
+            <div class="textwidget">
+                <div class="hot" style="height:160px">
+                    <a href="https://www.mysubmail.com/sms?s=codeceo" target="_blank">
+                        <img src="http://static.codeceo.com/images/2016/12/submail_ad_for_codeceo_600x320.jpg"
+                             style="width:300px;height:160px;border:#eee solid 1px"/></a>
+                </div>
+
+                <div class="hot" style="height:250px">
+                    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                    <!-- codeceo left 2 -->
+                    <ins class="adsbygoogle"
+                         style="display:inline-block;width:300px;height:250px"
+                         data-ad-client="ca-pub-3171310320403916"
+                         data-ad-slot="7648671380"></ins>
+                    <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                </div>
+
+                <div class="hot" style="height:250px">
+                    <script type="text/javascript">
+                        var cpro_id = "u2191321";
+                        (window["cproStyleApi"] = window["cproStyleApi"] || {})[cpro_id] = {
+                            at: "3",
+                            rsi0: "300",
+                            rsi1: "250",
+                            pat: "17",
+                            tn: "baiduCustNativeAD",
+                            rss1: "#FFFFFF",
+                            conBW: "1",
+                            adp: "1",
+                            ptt: "0",
+                            titFF: "%E5%BE%AE%E8%BD%AF%E9%9B%85%E9%BB%91",
+                            titFS: "14",
+                            rss2: "#000000",
+                            titSU: "0"
+                        }
+                    </script>
+                    <script src="http://cpro.baidustatic.com/cpro/ui/c.js" type="text/javascript"></script>
+                </div>
+            </div>
+        </div>
+        <div class="widget widget_d_hotpost"><h3 class="widget_tit">热门文章</h3>
+            <ul class="d_hotpost_txt">
+                <li><a href="http://www.codeceo.com/article/understanding-flexbox-everything-you-need-to-know.html"
+                       target="_blank">理解 Flexbox：你需要知道的一切</a></li>
+                <li><a href="http://www.codeceo.com/article/creation-motivated-programmer.html" target="_blank">创造型职业程序员的无奈</a>
+                </li>
+                <li><a href="http://www.codeceo.com/article/mistakes-i-made-as-a-developer.html" target="_blank">我（作为一名开发者）所犯过的错误</a>
+                </li>
+                <li><a href="http://www.codeceo.com/article/hecker-wang.html" target="_blank">黑客老王：一个人的黑客史</a></li>
+                <li><a href="http://www.codeceo.com/article/back-ali-interview.html"
+                       target="_blank">阿里面试回来，想和Java程序员谈一谈</a></li>
+                <li><a href="http://www.codeceo.com/article/android-5-years-interviews.html" target="_blank">一个五年
+                    Android 开发者百度、阿里、聚美、映客的面试心经</a></li>
+                <li><a href="http://www.codeceo.com/article/appstore-apply-hole.html" target="_blank">那些年提交 AppStore
+                    审核踩过的坑</a></li>
+                <li><a href="http://www.codeceo.com/article/youtube-recommend-algorithm.html" target="_blank">如何破解YouTube视频推荐算法</a>
+                </li>
+                <li><a href="http://www.codeceo.com/article/css3-3d-learn.html" target="_blank">手把手教你玩转 CSS3 3D 技术</a>
+                </li>
+                <li><a href="http://www.codeceo.com/article/taobao-home-high-performance.html" target="_blank">淘宝首页性能优化实践</a>
+                </li>
+            </ul>
+        </div>
+        <div class="widget widget_text">
+            <div class="textwidget">
+                <div class="hot" style="height:250px">
+                    <script type="text/javascript">
+                        var cpro_id = "u2509144";
+                        (window["cproStyleApi"] = window["cproStyleApi"] || {})[cpro_id] = {
+                            at: "3",
+                            rsi0: "300",
+                            rsi1: "250",
+                            pat: "17",
+                            tn: "baiduCustNativeAD",
+                            rss1: "#FFFFFF",
+                            conBW: "1",
+                            adp: "1",
+                            ptt: "0",
+                            titFF: "%E5%BE%AE%E8%BD%AF%E9%9B%85%E9%BB%91",
+                            titFS: "14",
+                            rss2: "#000000",
+                            titSU: "0"
+                        }
+                    </script>
+                    <script src="http://cpro.baidustatic.com/cpro/ui/c.js" type="text/javascript"></script>
+                </div>
+            </div>
+        </div>
+        <div class="widget widget_d_hotpost"><h3 class="widget_tit">职场人生</h3>
+            <ul class="d_hotpost_txt">
+                <li><a href="http://www.codeceo.com/article/google-software-engineering-experience.html"
+                       target="_blank">Google 的软件工程经验总结</a></li>
+                <li><a href="http://www.codeceo.com/article/programmer-qipa.html" target="_blank">程序员“奇葩”说</a></li>
+                <li><a href="http://www.codeceo.com/article/how-improve-intermediate-programmer.html" target="_blank">中级程序员还应该如何提高自己？</a>
+                </li>
+                <li><a href="http://www.codeceo.com/article/do-best-developer.html"
+                       target="_blank">技术大牛养成指南，一篇不鸡汤的成功学实践</a></li>
+                <li><a href="http://www.codeceo.com/article/software-outsourcing-and-lover.html" target="_blank">趣文：妓女、二奶和软件外包哪个靠谱</a>
+                </li>
+                <li><a href="http://www.codeceo.com/article/jipa-programmer-story.html" target="_blank">编程没有捷径：奇葩冒牌程序员的故事</a>
+                </li>
+                <li><a href="http://www.codeceo.com/article/why-you-need-start-coding.html" target="_blank">为什么你该开始学习编程了？</a>
+                </li>
+                <li><a href="http://www.codeceo.com/article/10-things-keep-opensource-healthy.html" target="_blank">保持开源项目健康运行并减少压力的
+                    10 件事</a></li>
+                <li><a href="http://www.codeceo.com/article/how-to-ask-question.html" target="_blank">程序员如何提一个好问题</a>
+                </li>
+                <li><a href="http://www.codeceo.com/article/my-poor-programmer-history.html" target="_blank">我作为程序员辣么穷的黑历史</a>
+                </li>
+            </ul>
+        </div>
+        <div class="widget widget_text">
+            <div class="textwidget"></div>
+        </div>
+        <div class="widget widget_text">
+            <div class="textwidget">
+                <div id="related_post_bar" class="widget_d_hotpost" style="margin-top:10px"></div>
+            </div>
+        </div>
+    </aside>
+    <div style="position:absolute;right:0px;">
+        <div class="widget widget_d_hotpost hot_cat">
+            <h3 class="widget_tit">热门栏目订阅</h3>
+            <ul class="cat_list">
+                <li>
+                    <img src="http://static.codeceo.com/images/2016/03/java-logo-4.jpg" alt="java" class="cat_img"/>
+                    <h4 class="cat_title"><a href="http://www.codeceo.com/article/category/develop/java"
+                                             target="_blank">Java</a></h4>
+                    <span class="cat_link"><a href="http://www.codeceo.com/article/category/develop/java/feed"
+                                              target="_blank">RSS</a></span>
+                    <span class="cat_link"><a href="http://weibo.com/u/3206249732" target="_blank">微博</a></span>
+                </li>
+                <li>
+                    <img src="http://static.codeceo.com/images/2016/03/programmer-logo-4.jpg" alt="程序员"
+                         class="cat_img"/>
+                    <h4 class="cat_title"><a href="http://www.codeceo.com/article/category/programmer" target="_blank">程序员</a>
+                    </h4>
+                    <span class="cat_link"><a href="http://www.codeceo.com/article/category/programmer/feed"
+                                              target="_blank">RSS</a></span>
+                    <span class="cat_link"><a href="http://weibo.com/u/2832482174" target="_blank">微博</a></span>
+                </li>
+                <li>
+                    <img src="http://static.codeceo.com/images/2016/03/android-logo-4.png" alt="Android"
+                         class="cat_img"/>
+                    <h4 class="cat_title"><a href="http://www.codeceo.com/article/category/develop/android"
+                                             target="_blank">Android</a></h4>
+                    <span class="cat_link"><a href="http://www.codeceo.com/article/category/develop/android/feed"
+                                              target="_blank">RSS</a></span>
+                </li>
+                <li>
+                    <img src="http://static.codeceo.com/images/2016/03/php-logo-4.png" alt="PHP" class="cat_img"/>
+                    <h4 class="cat_title"><a href="http://www.codeceo.com/article/tag/php" target="_blank">PHP</a></h4>
+                    <span class="cat_link"><a href="http://www.codeceo.com/article/tag/php/feed" target="_blank">RSS</a></span>
+                </li>
+                <li>
+                    <img src="http://static.codeceo.com/images/2016/03/javascript-logo-4.png" alt="JavaScript"
+                         class="cat_img"/>
+                    <h4 class="cat_title"><a href="http://www.codeceo.com/article/tag/javascript" target="_blank">JavaScript</a>
+                    </h4>
+                    <span class="cat_link"><a href="http://www.codeceo.com/article/tag/javascript/feed" target="_blank">RSS</a></span>
+                </li>
+                <li>
+                    <img src="http://static.codeceo.com/images/2016/03/linux-logo-4.png" alt="Linux" class="cat_img"/>
+                    <h4 class="cat_title"><a href="http://www.codeceo.com/article/tag/linux" target="_blank">Linux</a>
+                    </h4>
+                    <span class="cat_link"><a href="http://www.codeceo.com/article/tag/linux/feed"
+                                              target="_blank">RSS</a></span>
+                </li>
+            </ul>
+        </div>
+
+        <div style="clear:both;width:160px"></div>
+
+        <div style="width:160px;height:600px">
+            <script type="text/javascript">
+                var cpro_id = "u2518649";
+                (window["cproStyleApi"] = window["cproStyleApi"] || {})[cpro_id] = {
+                    at: "3",
+                    rsi0: "160",
+                    rsi1: "600",
+                    pat: "6",
+                    tn: "baiduCustNativeAD",
+                    rss1: "#FFFFFF",
+                    conBW: "1",
+                    adp: "1",
+                    ptt: "0",
+                    titFF: "%E5%BE%AE%E8%BD%AF%E9%9B%85%E9%BB%91",
+                    titFS: "14",
+                    rss2: "#000000",
+                    titSU: "0",
+                    ptbg: "90",
+                    piw: "0",
+                    pih: "0",
+                    ptp: "0"
+                }
+            </script>
+            <script src="http://cpro.baidustatic.com/cpro/ui/c.js" type="text/javascript"></script>
+        </div>
+
+        <div style="margin-top:20px" id="fixedNav">
+            <p style="text-align:center">
+                <b>关注我们的微博</b>
+            <div style="width:156px;overflow:hidden;border:#2a7cb9 solid 2px;margin-top:10px;margin-bottom:20px">
+                <iframe width="100%" height="80" class="share_self" frameborder="0" scrolling="no"
+                        src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=80&fansRow=2&ptype=1&speed=0&skin=1&isTitle=0&noborder=0&isWeibo=0&isFans=0&uid=2832482174&verifier=d71718ca&dpc=1"></iframe>
+            </div>
+            </p>
+            <p style="text-align:center">
+                <a style="display: block;width: 140px;background: #2a7cb9;font-size: 18px;color: #fff;line-height: 35px;padding: 10px;text-align:center;"
+                   href="http://www.codeceo.com/article/2016-codeceo-post-plan.html?utm_source=left_bar"
+                   target="_blank">付费投稿计划<br/>点击查看详情</a>
+            </p>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var relatedPostHTML = jQuery("#related-post-content");
+        jQuery("#related_post_bar").html(relatedPostHTML.html());
+        jQuery("#related-post-content").remove();
+        ScrollFloatPanel("related_post_bar", "related_scroll");
+
+        jQuery("#article-entry").find('pre').each(function (i, block) {
+            hljs.highlightBlock(block);
+        });
+        try {
+            var elScript = document.createElement("script");
+            elScript.setAttribute("language", "javascript");
+            elScript.setAttribute("src", "http://www.codeceo.com/wp-counter.php?post_id=" + escape(strBatchView));
+            document.getElementsByTagName("body")[0].appendChild(elScript);
+        }
+        catch (e) {
+        }
+        ;
+    </script>
+</section>
+<footer class="footer">
+    <div class="central">
+        <div class="trackcode">
+        </div>
+        <div class="copyright">
+            版权所有，保留一切权利！ © 2016 <a href="http://www.codeceo.com">码农网</a> <a href="http://www.miitbeian.gov.cn/"
+                                                                            target="_blank">浙ICP备14003773号-1</a> <a
+                target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33010502000955">
+            浙公网安备 33010502000955号</a> <a target="_blank" href="javascript:void(0)" style="color:red">
+            商务合作QQ：290074886（请注明来意）</a>
+        </div>
+    </div>
+</footer>
+<div class="rollto"><a class="ico ico-totop" title="回顶部"></a><a href="#respond" class="ico ico-torespond"
+                                                                title="发评论"></a></div>
+<script>var asr_1 = 0, asr_2 = 0;</script>
+<script src="http://static.codeceo.com/wp-asset/js/post.js"></script>
+<script>
+    window._bd_share_config = {
+        common: {
+            bdSnsKey: {"tsina": "1527345946"},
+            bdUrl: 'http://www.codeceo.com/article/log4j-usage.html'
+        },
+        share: [{
+            "bdSize": 16
+        }]
+    }
+    with (document)0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion=' + ~(-new Date() / 36e5)];
+</script>
+
+<script type="text/javascript">
+    ScrollFloatPanel("fixedNav", "nav_scroll");
+</script>
+
+<div style="display:none">
+    <script language="javascript" type="text/javascript"
+            src="http://static.codeceo.com/wp-asset/js/16025287.js"></script>
+
+    <script>
+        var _hmt = _hmt || [];
+        (function () {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?af429ff7a5d8173130dceafabcc90a92";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</div>
+
+
+</body>
+</html>
