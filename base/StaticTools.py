@@ -33,10 +33,14 @@ class NetTools:
         """
         :return: 网关IP
         """
+        '''
         t = os.popen('route -n')
         for i in t:
             if i.startswith('0.0.0.0'):
                 return re.split("\s+",i)[1]
+        '''
+        gateIp=netifaces.gateways()['default'][netifaces.AF_INET][0]
+        return gateIp
 
 
     @staticmethod
