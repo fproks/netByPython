@@ -28,17 +28,10 @@ def scanner_internet(ipscan):
     except Exception,e:
         logging.ERROR(e.message)
     else:
-        print(type(ans[0][0]))
+        #print(type(ans[0][0]))
         for snd,rcv in ans:
             list_mac=rcv.sprintf("%Ether.src%  %ARP.psrc%")
             ip=rcv.sprintf("%ARP.psrc%")
-
-            #name=socket.gethostbyaddr(ip)[0]
-
             print (list_mac)
-            #print (rcv.sprintf("%Ether.src%"))   #mac地址
-    logger=logging.getLogger("root")
-    logger.error("get mac finished")
-    logger.info("just test")
 
 

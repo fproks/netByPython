@@ -4,6 +4,7 @@ import logging
 import logging.config
 import codecs
 import time
+import sys
 import socket
 import fcntl
 import struct
@@ -118,12 +119,15 @@ class NetTools:
 
 
 
+'''
+查询局域网主机和MAC地址
+'''
 if __name__=="__main__":
-    logging.config.fileConfig(codecs.open("../log/logconfig.ini",'r','utf-8'))
+    #logging.config.fileConfig(codecs.open("../log/logconfig.ini",'r','utf-8'))
     NetTools.getGateway_mac()
     local_work=NetTools.search_with_gateway()
-    print (local_work)
     scanner_internet(local_work)
+    sys.exit(0)
 
 
 
