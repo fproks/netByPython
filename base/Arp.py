@@ -113,7 +113,6 @@ class Arp:
 
 
 if __name__ == "__main__":
-    print("first")
     arps = Arp('192.68.4.131')
     arps.routeForwarding(True)  #开启路由转发
     arps.arpSpoofing()
