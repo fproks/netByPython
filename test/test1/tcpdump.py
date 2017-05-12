@@ -14,7 +14,7 @@ python执行shell语句，将结果通过管道进行输出
 '''
 import sys
 import subprocess
-sub=subprocess.Popen('tcpdump -n -nn -vv -XX -e -A',shell=True,stdout=subprocess.PIPE)
+sub=subprocess.Popen('tcpdump -n -nn -vv -e -A',shell=True,stdout=subprocess.PIPE)
 while sub.poll()==None:
     sys.stdout.flush()
     print sub.stdout.readline(),
