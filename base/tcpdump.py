@@ -14,11 +14,24 @@ python执行shell语句，将结果通过管道进行输出
 '''
 import sys
 import subprocess
-sub=subprocess.Popen('tcpdump -n -nn -vv -e -A',shell=True,stdout=subprocess.PIPE)
-while sub.poll()==None:
-    sys.stdout.flush()
-    print sub.stdout.readline(),
+import signal
 
-print sub.returncode
+def tcpdump(host):
+    sub=subprocess.Popen('tcpdump src host '+host+' -n -nn -vv -e -A',shell=True,stdout=subprocess.PIPE)
+    try:
+        while sub.poll()==None:
+            sys.stdout.flush()
+            print sub.stdout.readline()
 
+        print sub.returncode
+    except:
+        sub.kill()
+        exit(0)
+
+if __name__ =="__main__":
+    #host=sys.argv[1]
+    host="192.68.4.103"
+    #print host
+    tcpdump(host)
+    exit(0)
 
